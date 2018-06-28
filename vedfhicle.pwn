@@ -6,7 +6,7 @@
 #define FILTERSCRIPTS
 
 //==================== MySQL Information =======================//
-new MySQL:vHandle; // vHandle 'CTRL + H' ile arama bölümüne yazýp istediðiniz þekilde replace edebilirsiniz.
+new MySQL:vHandle; // vHandle 'CTRL + H' ile arama bÃ¶lÃ¼mÃ¼ne yazÃ½p istediÃ°iniz Ã¾ekilde replace edebilirsiniz.
 
 #define SQL_HOST "127.0.0.1"
 #define SQL_USER "root"
@@ -40,7 +40,7 @@ stock SendClientMessageEx(playerid, Color, const text[], va_args<>)
 
 //=================================================================
 
-#define ConfirmDestroyVehicle 1 // Dialog ID deðiþtirebilirsiniz.
+#define ConfirmDestroyVehicle 1 // Dialog ID deÃ°iÃ¾tirebilirsiniz.
 
 #define MAX_DYNAMIC_VEHICLES MAX_VEHICLES
 
@@ -170,7 +170,7 @@ public Load_Vehicle()
 			ChangeVehiclePaintjob(VehicleData[i][vehicleObject], VehicleData[i][vehiclePaintJob]);
 			for(new j = 0; j < 14; j++) if(VehicleData[i][vehicleComponent][j] != 0) AddVehicleComponent(VehicleData[i][vehicleObject], VehicleData[i][vehicleComponent][j]);
 		}
-		else print("Sunucu maksimum araç sýnýrýna ulaþtý.");
+		else print("Sunucu maksimum araÃ§ sÃ½nÃ½rÃ½na ulaÃ¾tÃ½.");
 		
 	}
 	return 1;
@@ -322,7 +322,7 @@ ReturnDateEx()
 CMD:aracyarat(cmdid, playerid, params[])
 {
 	if(!IsPlayerAdmin(playerid))
-		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}bu komutu kullanmak için rcon giriþi yapmalýsýnýz.");
+		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}bu komutu kullanmak iÃ§in rcon giriÃ¾i yapmalÃ½sÃ½nÃ½z.");
 
 	new
 		model,
@@ -340,15 +340,15 @@ CMD:aracyarat(cmdid, playerid, params[])
 		return SendClientMessage(playerid, -1, "KULLANIM: /aracyarat [Model 411-611] [&Renk 1] [&Renk 2] [&Paintjob] [&Interior] [&Virtual]");
 		
 	if(model < 411 || model > 611)
-		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}model ID 411 ve 611 arasýnda olmalýdýr.");
+		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}model ID 411 ve 611 arasÃ½nda olmalÃ½dÃ½r.");
 
 	GetPlayerPos(playerid, x, y, z);	
 	id = Create_Vehicle(x, y, z, model, color1, color2, paintjob, interior, virtual);
 	
 	if(id == INVALID_VEHICLE_ID)
-		SendClientMessage(playerid, -1, "Sunucu maksimum araç yaratma sýnýrýna ulaþtý.");
+		SendClientMessage(playerid, -1, "Sunucu maksimum araÃ§ yaratma sÃ½nÃ½rÃ½na ulaÃ¾tÃ½.");
 	else
-		SendClientMessage(playerid, -1, "%d ID'li araç yarattýnýz.",id);
+		SendClientMessage(playerid, -1, "%d ID'li araÃ§ yarattÃ½nÃ½z.",id);
 	
 	return 1;
 }
@@ -356,7 +356,7 @@ CMD:aracyarat(cmdid, playerid, params[])
 CMD:aracsil(cmdid, playerid, params[])
 {
 	if(!IsPlayerAdmin(playerid))
-		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}bu komutu kullanmak için rcon giriþi yapmalýsýnýz.");
+		return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}bu komutu kullanmak iÃ§in rcon giriÃ¾i yapmalÃ½sÃ½nÃ½z.");
 	
 	new
 		id = INVALID_VEHICLE_ID;
@@ -364,20 +364,20 @@ CMD:aracsil(cmdid, playerid, params[])
 	if((id = Nearest_Vehicle(playerid)) != INVALID_VEHICLE_ID)
 	{
 		new string[256];
-		format(string, sizeof(string), "Araç ID: %d\tSQL ID: %d\n\n%s model aracý silmek istediðinize emin misiniz?",
+		format(string, sizeof(string), "AraÃ§ ID: %d\tSQL ID: %d\n\n%s model aracÃ½ silmek istediÃ°inize emin misiniz?",
 		VehicleData[id][vehicleObject], id,GetVehicleName(VehicleData[id][vehicleObject]));
-		ShowPlayerDialog(playerid, ConfirmDestroyVehicle, DIALOG_STYLE_MSGBOX, "Rcon - Araç", string, "Sil", "Çýk");
+		ShowPlayerDialog(playerid, ConfirmDestroyVehicle, DIALOG_STYLE_MSGBOX, "Rcon - AraÃ§", string, "Sil", "Ã‡Ã½k");
 		SetPVarInt(playerid, "DialogDestroyVehicle", id);
 	}
 	else
 	{
 		if(sscanf(params, "d", id))
-			return SendClientMessage(playerid, -1, "KULLANIM: /aracsil [Araç ID (/dl)]");
+			return SendClientMessage(playerid, -1, "KULLANIM: /aracsil [AraÃ§ ID (/dl)]");
 		
 		new realid = Car_GetID(id);
 		
 		if(!VehicleData[realid][vehicleExists])
-			return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}girdiðiniz ID'deki araç yaratýlmamýþ.");
+			return SendClientMessage(playerid, -1, "{FF0000}Hata: {FFFFFF}girdiÃ°iniz ID'deki araÃ§ yaratÃ½lmamÃ½Ã¾.");
 		
 		RemoveVehicleData(realid);
 		
